@@ -35,10 +35,6 @@ pub fn proposal_validty(
         return false;
     }
 
-    // check signature
-    if !verify_signature(proposal.body_hash(), proposal.signature, proposal.proposer) {
-        return false;
-    }
-
-    true
+    verify_signature(proposal.body_hash(), proposal.signature, proposal.proposer)
+   
 }
