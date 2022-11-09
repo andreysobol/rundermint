@@ -1,10 +1,10 @@
 use crate::messages::proposal::Proposal;
-use crate::messages::prevote::Prevote;
+use crate::messages::precommit::Precommit;
 use ed25519_dalek::PublicKey;
 use crate::edsig::verify_signature::verify_signature;
 
-pub fn prevote_validty(
-    prevote: Prevote,
+pub fn precommit_validty(
+    prevote: Precommit,
     proposal: Option<Proposal>,
     validators: &[PublicKey],
     already_voted: &[PublicKey],
