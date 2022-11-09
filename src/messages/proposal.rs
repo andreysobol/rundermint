@@ -1,9 +1,11 @@
 use crate::statemachine::statetransition::StateTransition;
-use crate::types::{Round, Height, ProofOfLock};
+use crate::types::{Round, Height};
 use ed25519_dalek::{Signature, PublicKey};
 use ed25519_dalek::{SIGNATURE_LENGTH};
 use sha2::{Sha256, Digest};
+use crate::messages::proof_of_lock::ProofOfLock;
 
+#[derive(Clone)]
 pub struct Proposal {
     // mb id or pk or proposer
     pub proposer: PublicKey,

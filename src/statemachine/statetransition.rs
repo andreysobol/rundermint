@@ -1,6 +1,7 @@
 use sha2::{Sha256, Digest};
 use crate::statemachine::state::State;
 
+#[derive(Clone)]
 pub struct StateTransition {
     pub data: Vec<u8>,
 }

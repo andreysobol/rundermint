@@ -1,6 +1,7 @@
 use ed25519_dalek::{Signature, PublicKey};
 use sha2::{Sha256, Digest};
 
+#[derive(Clone)]
 pub struct Prevote {
     pub proposal_hash: Vec<u8>,
     pub voter: PublicKey,

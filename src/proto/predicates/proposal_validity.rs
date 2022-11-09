@@ -1,5 +1,5 @@
 use crate::messages::proposal::Proposal;
-use crate::types::{Round, Height, ProofOfLock};
+use crate::types::{Round, Height};
 use crate::statemachine::state::State;
 use crate::proto::round_manager::round_proposer;
 use ed25519_dalek::PublicKey;

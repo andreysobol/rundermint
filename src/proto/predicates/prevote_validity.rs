@@ -7,7 +7,7 @@ pub fn prevote_validty(
     prevote: Prevote,
     proposal: Option<Proposal>,
     validators: &[PublicKey],
-    already_voted: &[PublicKey],
+    // already_voted: &[PublicKey],
     // Do we need already_voted?
 ) -> bool {
 
