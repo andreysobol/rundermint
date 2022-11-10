@@ -1,7 +1,6 @@
 use crate::messages::proof_of_lock::ProofOfLock;
 use crate::proto::consensus_state::ConsensusState;
 use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
-//use crate::statemachine::statetransition::StateTransition;
 
 pub fn on_proof_of_lock(
     consensus_state: ConsensusState,
