@@ -1,9 +1,35 @@
-use crate::messages::proposal::Proposal;
+use crate::messages::proof_of_lock::ProofOfLock;
 use crate::proto::consensus_state::ConsensusState;
+use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
+//use crate::statemachine::statetransition::StateTransition;
 
-pub fn on_proposal(
+pub fn on_proof_of_lock(
     consensus_state: ConsensusState,
-    proposal: Proposal,
+    proof_of_lock: ProofOfLock,
 ) -> ConsensusState {
-    consensus_state
+
+    let mut new_consensus_state = consensus_state.clone();
+
+    match consensus_state.locked_state {
+        Some(locked_state) => {}
+        None => {
+
+            let proof_of_lock_clone = proof_of_lock.clone();
+
+            if proof_of_lock_validity(
+                &proof_of_lock,
+                consensus_state.round,
+                consensus_state.height,
+                &consensus_state.validators,
+                consensus_state.threshold
+            ) {
+                let state_transition = proof_of_lock.proposal.state_transition;
+                let new_locked_state = state_transition.apply_state_transition(&consensus_state.state);
+                new_consensus_state.locked_state = Some(new_locked_state);
+                new_consensus_state.proof_of_lock = Some(proof_of_lock_clone);
+            }
+        }
+    }
+
+    new_consensus_state
 }

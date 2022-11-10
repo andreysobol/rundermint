@@ -13,12 +13,11 @@ pub fn commit_validty(
     precommits: Vec<Precommit>,
     round: Round,
     height: Height,
-    last_state: State,
     validators: &[PublicKey],
     threshold: usize,
 ) -> bool {
 
-    if !proof_of_lock_validity(proof_of_lock, round, height, last_state, validators, threshold) {
+    if !proof_of_lock_validity(proof_of_lock, round, height, validators, threshold) {
         return false;
     }
 

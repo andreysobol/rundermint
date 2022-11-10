@@ -10,17 +10,8 @@ pub fn proposal_validty(
     proposal: Proposal,
     round: Round,
     height: Height,
-    last_state: State,
     validators: &[PublicKey],
 ) -> bool {
-
-    // Check if the proposal is valid
-    //let proof_of_lock = &proposal.proof_of_lock;
-
-    // check proof_of_lock
-    // if proof_of_lock != last_state
-    // last_state = proof_of_lock.state
-    // i think we need to check that state is just one step ahead of last_state
 
     if proposal.round != round {
         return false;

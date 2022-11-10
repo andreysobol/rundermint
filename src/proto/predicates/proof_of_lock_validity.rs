@@ -11,14 +11,13 @@ pub fn proof_of_lock_validity(
     proof_of_lock: &ProofOfLock,
     round: Round,
     height: Height,
-    last_state: State,
     validators: &[PublicKey],
     threshold: usize,
 ) -> bool {
 
     let proposal: &Proposal = &proof_of_lock.proposal.clone();
 
-    proposal_validty(proposal.clone(), round, height, last_state, validators);
+    proposal_validty(proposal.clone(), round, height, validators);
 
     let validity_map = validators.iter().map(|validator| {
         let possible_prevotes = proof_of_lock.prevotes.iter().filter(|prevote| &prevote.voter == validator);

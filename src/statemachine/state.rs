@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct State {
     pub state_hash: Vec<u8>,
 }
