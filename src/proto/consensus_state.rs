@@ -1,3 +1,4 @@
+use crate::messages::precommit::Precommit;
 use crate::messages::prevote::Prevote;
 use crate::messages::proposal::Proposal;
 use crate::types::{Round, Height};
@@ -16,4 +17,5 @@ pub struct ConsensusState {
     pub proof_of_lock: Option<ProofOfLock>,
     pub proposal: Option<Proposal>,
     pub prevotes: Vec<Prevote>,
+    pub precommits: Vec<Precommit>,
 }
