@@ -6,5 +6,5 @@ pub struct ConsensusState {
     pub round: Round,
     pub height: Height,
     pub state: State,
-    pub validators: PublicKey,
+    pub validators: Vec<PublicKey>,
 }
