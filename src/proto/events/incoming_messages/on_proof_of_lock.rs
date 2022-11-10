@@ -1,11 +1,12 @@
 use crate::messages::proof_of_lock::ProofOfLock;
 use crate::proto::consensus_state::ConsensusState;
 use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
+use crate::messages::message::Message;
 
 pub fn on_proof_of_lock(
     consensus_state: ConsensusState,
     proof_of_lock: ProofOfLock,
-) -> ConsensusState {
+) -> (ConsensusState, Option<Message>) {
 
     let mut new_consensus_state = consensus_state.clone();
 
@@ -26,5 +27,5 @@ pub fn on_proof_of_lock(
         }
     }
 
-    new_consensus_state
+    (new_consensus_state, None)
 }
