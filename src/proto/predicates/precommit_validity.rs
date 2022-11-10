@@ -1,5 +1,5 @@
 use crate::messages::proposal::Proposal;
-use crate::messages::precommit::{Precommit, self};
+use crate::messages::precommit::Precommit;
 use ed25519_dalek::PublicKey;
 use crate::edsig::verify_signature::verify_signature;
 
