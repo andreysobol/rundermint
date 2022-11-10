@@ -7,7 +7,7 @@ pub fn precommit_validty(
     prevote: Precommit,
     proposal: Option<Proposal>,
     validators: &[PublicKey],
-    already_voted: &[PublicKey],
+    // already_voted: &[PublicKey],
     // Do we need already_voted?
 ) -> bool {
 
