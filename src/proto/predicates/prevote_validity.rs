@@ -3,7 +3,7 @@ use crate::messages::prevote::Prevote;
 use ed25519_dalek::PublicKey;
 use crate::edsig::verify_signature::verify_signature;
 
-pub fn prevote_validty(
+pub fn prevote_validity(
     prevote: Prevote,
     proposal: Option<Proposal>,
     validators: &[PublicKey],
