@@ -12,7 +12,7 @@ pub struct Proposal {
     pub round: Round,
     pub height: Height,
     pub state_transition: StateTransition,
-    pub proof_of_lock: ProofOfLock,
+    //pub proof_of_lock: ProofOfLock,
     //add here signature
     pub signature: Signature,
 }

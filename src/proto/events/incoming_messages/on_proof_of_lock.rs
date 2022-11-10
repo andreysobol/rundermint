@@ -1,5 +1,5 @@
-use crate::proto::consensus_state::ConsensusState;
 use crate::messages::proposal::Proposal;
+use crate::proto::consensus_state::ConsensusState;
 
 pub fn on_proposal(
     consensus_state: ConsensusState,

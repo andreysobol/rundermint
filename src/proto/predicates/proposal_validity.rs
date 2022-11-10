@@ -15,7 +15,7 @@ pub fn proposal_validty(
 ) -> bool {
 
     // Check if the proposal is valid
-    let proof_of_lock = &proposal.proof_of_lock;
+    //let proof_of_lock = &proposal.proof_of_lock;
 
     // check proof_of_lock
     // if proof_of_lock != last_state
