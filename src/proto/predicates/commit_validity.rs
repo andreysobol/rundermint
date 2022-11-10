@@ -1,12 +1,14 @@
 use crate::messages::proposal::Proposal;
 use crate::types::{Round, Height};
 use crate::statemachine::state::State;
-use crate::proto::round_manager::round_proposer;
 use ed25519_dalek::PublicKey;
-use crate::edsig::verify_signature::verify_signature;
+use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
+use crate::messages::precommit::Precommit;
+use crate::proto::predicates::precommit_validity::precommit_validty;
+use crate::messages::proof_of_lock::ProofOfLock;
 
 pub fn commit_validty(
-    proposal: Precommit,
+    proposal: Proposal,
     proof_of_lock: &ProofOfLock,
     precommits: Vec<Precommit>,
     round: Round,
