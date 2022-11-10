@@ -5,5 +5,11 @@ pub fn on_proposal(
     consensus_state: ConsensusState,
     proposal: Proposal,
 ) -> ConsensusState {
-    consensus_state
+    if consensus_state.proposal.is_none() {
+        let mut new_consensus_state = consensus_state.clone();
+        new_consensus_state.proposal = Some(proposal);
+        new_consensus_state
+    } else {
+        consensus_state
+    }
 }

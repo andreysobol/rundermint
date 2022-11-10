@@ -1,3 +1,4 @@
+use crate::messages::proposal::Proposal;
 use crate::types::{Round, Height};
 use crate::statemachine::state::State;
 use crate::messages::proof_of_lock::ProofOfLock;
@@ -12,4 +13,5 @@ pub struct ConsensusState {
     pub validators: Vec<PublicKey>,
     pub threshold: usize,
     pub proof_of_lock: Option<ProofOfLock>,
+    pub proposal: Option<Proposal>,
 }
