@@ -8,8 +8,8 @@ use crate::proto::predicates::precommit_validity::precommit_validty;
 use crate::messages::proof_of_lock::ProofOfLock;
 
 pub fn commit_validty(
-    proposal: Proposal,
-    proof_of_lock: &ProofOfLock,
+    proposal: Option<Proposal>,
+    proof_of_lock: Option<ProofOfLock>,
     precommits: Vec<Precommit>,
     round: Round,
     height: Height,
@@ -17,21 +17,45 @@ pub fn commit_validty(
     threshold: usize,
 ) -> bool {
 
-    if !proof_of_lock_validity(proof_of_lock, round, height, validators, threshold) {
-        return false;
+    fn check(
+        validators: &[PublicKey],
+        precommits: Vec<Precommit>,
+        threshold: usize,
+        proposal: Proposal,
+    ) -> bool {
+        let validity_map = validators.iter().map(|validator| {
+            let possible_precommits = precommits.iter().filter(|precommit| &precommit.voter == validator);
+            let possible_precommits_vec = possible_precommits.collect::<Vec<_>>(); 
+            if possible_precommits_vec.len() == 1 {
+                precommit_validty(possible_precommits_vec[0].clone(), Some(proposal.clone()), validators)
+            } else {
+                false
+            }
+        });
+        
+        let amount_of_true = validity_map.filter(|validity| *validity).count();
+
+        amount_of_true >= threshold
     }
 
-    let validity_map = validators.iter().map(|validator| {
-        let possible_precommits = precommits.iter().filter(|precommit| &precommit.voter == validator);
-        let possible_precommits_vec = possible_precommits.collect::<Vec<_>>(); 
-        if possible_precommits_vec.len() == 1 {
-            precommit_validty(possible_precommits_vec[0].clone(), Some(proposal.clone()), validators)
-        } else {
+    match proposal {
+        Some(proposal) => {
+            match proof_of_lock {
+                Some(proof_of_lock) => {
+                    if !proof_of_lock_validity(&proof_of_lock, round, height, validators, threshold) {
+                        false
+                    } else {
+                        check(validators, precommits, threshold, proposal)
+                    }
+                },
+                None => {
+                    false
+                }                
+            }
+        },
+        None => {
             false
         }
-    });
-    
-    let amount_of_true = validity_map.filter(|validity| *validity).count();
+    }
 
-    amount_of_true >= threshold
 }

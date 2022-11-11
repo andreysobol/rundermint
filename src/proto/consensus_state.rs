@@ -18,4 +18,5 @@ pub struct ConsensusState {
     pub proposal: Option<Proposal>,
     pub prevotes: Vec<Prevote>,
     pub precommits: Vec<Precommit>,
+    pub commited: bool,
 }
