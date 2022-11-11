@@ -9,10 +9,10 @@ use ed25519_dalek::{PublicKey, Signature, SecretKey, Signer, Keypair};
 
 pub fn sign_message(message: &[u8], secret_key: SecretKey) -> Signature {
     let public_key = PublicKey::from(&secret_key);
-    let Keypair = Keypair {
+    let keypair = Keypair {
         public: public_key,
         secret: secret_key,
     };
-    let signature = Keypair.sign(message);
+    let signature = keypair.sign(message);
     signature
 }
