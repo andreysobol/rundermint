@@ -15,34 +15,32 @@ pub fn on_prevote(
 
     if consensus_state.prevotes.iter().find(|el| {
         el.voter == prevote.voter
-    }).is_none() {
-        if prevote_validity(
+    }).is_none() && prevote_validity(
             prevote.clone(),
             consensus_state.proposal.clone(),
             &consensus_state.validators,
         ) {
-            new_consensus_state.prevotes.push(prevote.clone());
-            message = Some(Message::Prevote(prevote));
+        new_consensus_state.prevotes.push(prevote.clone());
+        message = Some(Message::Prevote(prevote));
 
-            match consensus_state.proposal {
-                Some(p) => {
-                    let try_new_proof_of_lock = ProofOfLock {
-                        proposal: Box::new(p.clone()),
-                        prevotes: new_consensus_state.prevotes.clone(),
-                    };
-                    if proof_of_lock_validity(
-                        &try_new_proof_of_lock,
-                        consensus_state.round,
-                        consensus_state.height,
-                        &consensus_state.validators,
-                        consensus_state.threshold
-                    ) {
-                        new_consensus_state.proof_of_lock = Some(try_new_proof_of_lock.clone());
-                        message = Some(Message::ProofOfLock(try_new_proof_of_lock));
-                    }
-                },
-                None => {},
-            }
+        match consensus_state.proposal {
+            Some(p) => {
+                let try_new_proof_of_lock = ProofOfLock {
+                    proposal: Box::new(p),
+                    prevotes: new_consensus_state.prevotes.clone(),
+                };
+                if proof_of_lock_validity(
+                    &try_new_proof_of_lock,
+                    consensus_state.round,
+                    consensus_state.height,
+                    &consensus_state.validators,
+                    consensus_state.threshold
+                ) {
+                    new_consensus_state.proof_of_lock = Some(try_new_proof_of_lock.clone());
+                    message = Some(Message::ProofOfLock(try_new_proof_of_lock));
+                }
+            },
+            None => {},
         }
     }
 

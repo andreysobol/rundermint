@@ -1,7 +1,7 @@
 use crate::messages::proof_of_lock::ProofOfLock;
 use crate::messages::proposal::Proposal;
 use crate::types::{Round, Height};
-use crate::statemachine::state::State;
+
 use ed25519_dalek::PublicKey;
 
 use super::prevote_validity::prevote_validity;

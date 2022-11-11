@@ -1,6 +1,6 @@
 use crate::messages::proposal::Proposal;
 use crate::types::{Round, Height};
-use crate::statemachine::state::State;
+
 use ed25519_dalek::PublicKey;
 use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
 use crate::messages::precommit::Precommit;

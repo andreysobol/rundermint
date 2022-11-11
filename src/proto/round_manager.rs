@@ -6,5 +6,5 @@ pub fn round_proposer(
     validators: &[PublicKey],
 ) -> PublicKey {
     let proposer_index = round % (validators.len() as u64);
-    validators[proposer_index as usize].clone()
+    validators[proposer_index as usize]
 }

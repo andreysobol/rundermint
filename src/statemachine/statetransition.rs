@@ -9,7 +9,7 @@ pub struct StateTransition {
 impl StateTransition {
     pub fn new(data: Vec<u8>) -> StateTransition {
         StateTransition {
-            data: data,
+            data,
         }
     }
 

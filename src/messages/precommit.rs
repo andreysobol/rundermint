@@ -19,8 +19,8 @@ impl Precommit {
     pub fn body_hash(&self) -> Vec<u8> {
         let mut hasher = Sha256::new();
         hasher.update(self.body_to_vec_bytes());
-        let result = hasher.finalize().to_vec();
-        result
+        
+        hasher.finalize().to_vec()
     }
 
 }

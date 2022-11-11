@@ -1,4 +1,4 @@
-use crate::{messages::{precommit::Precommit, message::Message}, proto::{consensus_state::ConsensusState, predicates::{commit_validity::commit_validty, precommit_validity::{self, precommit_validty}}}};
+use crate::{messages::{precommit::Precommit, message::Message}, proto::{consensus_state::ConsensusState, predicates::{commit_validity::commit_validty, precommit_validity::{precommit_validty}}}};
 
 pub fn on_precommit(
     consensus_state: ConsensusState,
@@ -18,7 +18,7 @@ pub fn on_precommit(
             consensus_state.proposal.clone(),
             &consensus_state.validators,
         ) {
-            message = Some(Message::Precommit(precommit.clone()));
+            message = Some(Message::Precommit(precommit));
 
             if commit_validty(
                 consensus_state.proposal,
@@ -28,10 +28,8 @@ pub fn on_precommit(
                 consensus_state.height,
                 &consensus_state.validators,
                 consensus_state.threshold,
-            ) {
-                if !consensus_state.commited {
-                    new_consensus_state.commited = true;
-                }
+            ) && !consensus_state.commited {
+                new_consensus_state.commited = true;
             }
         }
     }

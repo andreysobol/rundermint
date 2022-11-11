@@ -31,7 +31,7 @@ mod tests {
     use super::*;
 
     use ed25519_dalek::{Keypair, Signer};
-    use ed25519_dalek::{PublicKey, Signature, SecretKey};
+    
 
     use rand::rngs::OsRng;
 

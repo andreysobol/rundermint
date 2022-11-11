@@ -16,29 +16,26 @@ pub fn on_proposal(
     let mut new_consensus_state = consensus_state.clone();
     let mut messages = Vec::new();
 
-    if consensus_state.proposal.is_none() {
-
-        if proposal_validty(
+    if consensus_state.proposal.is_none() && proposal_validty(
             proposal.clone(),
             consensus_state.round,
             consensus_state.height,
             &consensus_state.validators,
         ) {
-            new_consensus_state.proposal = Some(proposal.clone());
-            messages.push(Message::Proposal(proposal.clone()));
+        new_consensus_state.proposal = Some(proposal.clone());
+        messages.push(Message::Proposal(proposal.clone()));
 
-            let public_key = PublicKey::from(&secret_key);
+        let public_key = PublicKey::from(&secret_key);
 
-            let proposal_hash = proposal.full_hash();
+        let proposal_hash = proposal.full_hash();
 
-            let prevote = Prevote {
-                voter: public_key,
-                proposal_hash: proposal_hash.clone(),
-                signature: sign_message(&proposal_hash, secret_key),
-            };
+        let prevote = Prevote {
+            voter: public_key,
+            proposal_hash: proposal_hash.clone(),
+            signature: sign_message(&proposal_hash, secret_key),
+        };
 
-            messages.push(Message::Prevote(prevote));
-        }
+        messages.push(Message::Prevote(prevote));
     }
     
     (new_consensus_state, messages)

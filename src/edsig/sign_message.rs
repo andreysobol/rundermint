@@ -13,8 +13,8 @@ pub fn sign_message(message: &[u8], secret_key: SecretKey) -> Signature {
         public: public_key,
         secret: secret_key,
     };
-    let signature = keypair.sign(message);
-    signature
+    
+    keypair.sign(message)
 }
 
 #[cfg(test)]

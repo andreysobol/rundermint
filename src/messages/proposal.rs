@@ -1,9 +1,9 @@
 use crate::statemachine::statetransition::StateTransition;
 use crate::types::{Round, Height};
 use ed25519_dalek::{Signature, PublicKey};
-use ed25519_dalek::{SIGNATURE_LENGTH};
+
 use sha2::{Sha256, Digest};
-use crate::messages::proof_of_lock::ProofOfLock;
+
 
 #[derive(Clone)]
 pub struct Proposal {
@@ -28,16 +28,16 @@ impl Proposal {
     pub fn body_hash(&self) -> Vec<u8> {
         let mut hasher = Sha256::new();
         hasher.update(self.body_to_vec_bytes());
-        let result = hasher.finalize().to_vec();
-        result
+        
+        hasher.finalize().to_vec()
     }
 
     pub fn full_hash(&self) -> Vec<u8> {
         let mut hasher = Sha256::new();
         hasher.update(self.body_to_vec_bytes());
-        hasher.update(self.signature.to_bytes().to_vec());
-        let result = hasher.finalize().to_vec();
-        result
+        hasher.update(self.signature.to_bytes());
+        
+        hasher.finalize().to_vec()
     }
 
 }
