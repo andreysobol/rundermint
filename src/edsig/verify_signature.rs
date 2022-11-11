@@ -18,8 +18,6 @@ pub fn verify_signature(message: Vec<u8>, signature: Signature, public_key: Publ
     }
 }
 
-// test code for verify_signature
-
 #[cfg(test)]
 
 mod tests {
