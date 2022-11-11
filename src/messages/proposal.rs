@@ -32,6 +32,14 @@ impl Proposal {
         result
     }
 
+    pub fn full_hash(&self) -> Vec<u8> {
+        let mut hasher = Sha256::new();
+        hasher.update(self.body_to_vec_bytes());
+        hasher.update(self.signature.to_bytes().to_vec());
+        let result = hasher.finalize().to_vec();
+        result
+    }
+
 }
 
 
