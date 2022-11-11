@@ -1,7 +1,7 @@
-use crate::messages::proposal::Proposal;
-use crate::messages::prevote::Prevote;
-use ed25519_dalek::PublicKey;
 use crate::edsig::verify_signature::verify_signature;
+use crate::messages::prevote::Prevote;
+use crate::messages::proposal::Proposal;
+use ed25519_dalek::PublicKey;
 
 pub fn prevote_validity(
     prevote: Prevote,
@@ -10,7 +10,6 @@ pub fn prevote_validity(
     // already_voted: &[PublicKey],
     // Do we need already_voted?
 ) -> bool {
-
     if proposal.is_none() {
         return false;
     }
@@ -26,5 +25,4 @@ pub fn prevote_validity(
     }
 
     verify_signature(prevote.body_hash(), prevote.signature, prevote.voter)
-
 }

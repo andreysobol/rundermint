@@ -1,4 +1,4 @@
-use ed25519_dalek::{Verifier, PublicKey, Signature};
+use ed25519_dalek::{PublicKey, Signature, Verifier};
 
 /*pub fn verify_signature(
     message: &[u8],
@@ -10,11 +10,7 @@ use ed25519_dalek::{Verifier, PublicKey, Signature};
     public_key.verify(message, &signature)
 }*/
 
-pub fn verify_signature(
-    message: Vec<u8>,
-    signature: Signature,
-    public_key: PublicKey,
-) -> bool {
+pub fn verify_signature(message: Vec<u8>, signature: Signature, public_key: PublicKey) -> bool {
     let result = public_key.verify(&message[..], &signature);
     match result {
         Ok(_) => true,
@@ -31,17 +27,15 @@ mod tests {
     use super::*;
 
     use ed25519_dalek::{Keypair, Signer};
-    
 
     use rand::rngs::OsRng;
 
-    use sha2::{Sha256, Digest};
+    use sha2::{Digest, Sha256};
 
     #[test]
 
     fn test_verify_signature() {
-
-        let mut csprng = OsRng{};
+        let mut csprng = OsRng {};
 
         let keypair: Keypair = Keypair::generate(&mut csprng);
 
@@ -60,7 +54,5 @@ mod tests {
         let is_valid = verify_signature(message, signature, public_key);
 
         assert_eq!(is_valid, true);
-
     }
-
 }

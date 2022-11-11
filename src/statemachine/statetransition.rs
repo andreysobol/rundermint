@@ -1,5 +1,5 @@
-use sha2::{Sha256, Digest};
 use crate::statemachine::state::State;
+use sha2::{Digest, Sha256};
 
 #[derive(Clone)]
 pub struct StateTransition {
@@ -8,9 +8,7 @@ pub struct StateTransition {
 
 impl StateTransition {
     pub fn new(data: Vec<u8>) -> StateTransition {
-        StateTransition {
-            data,
-        }
+        StateTransition { data }
     }
 
     pub fn get_data(&self) -> Vec<u8> {
@@ -25,7 +23,6 @@ impl StateTransition {
     }
 
     pub fn apply_state_transition(&self, state: &State) -> State {
-
         let prev_state_hash = state.get_state_hash();
         let data_hash = self.get_data_hash();
 
@@ -39,8 +36,6 @@ impl StateTransition {
             result = hasher.finalize().to_vec();
         }
 
-        State {
-            state_hash: result,
-        }
+        State { state_hash: result }
     }
 }

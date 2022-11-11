@@ -1,9 +1,9 @@
 use crate::messages::precommit::Precommit;
 use crate::messages::prevote::Prevote;
-use crate::messages::proposal::Proposal;
-use crate::types::{Round, Height};
-use crate::statemachine::state::State;
 use crate::messages::proof_of_lock::ProofOfLock;
+use crate::messages::proposal::Proposal;
+use crate::statemachine::state::State;
+use crate::types::{Height, Round};
 use ed25519_dalek::PublicKey;
 
 #[derive(Clone)]

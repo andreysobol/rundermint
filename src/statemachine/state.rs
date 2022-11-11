@@ -5,9 +5,7 @@ pub struct State {
 
 impl State {
     pub fn new() -> State {
-        State {
-            state_hash: vec![],
-        }
+        State { state_hash: vec![] }
     }
 
     pub fn get_state_hash(&self) -> Vec<u8> {

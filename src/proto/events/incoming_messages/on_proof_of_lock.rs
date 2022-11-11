@@ -1,13 +1,12 @@
+use crate::messages::message::Message;
 use crate::messages::proof_of_lock::ProofOfLock;
 use crate::proto::consensus_state::ConsensusState;
 use crate::proto::predicates::proof_of_lock_validity::proof_of_lock_validity;
-use crate::messages::message::Message;
 
 pub fn on_proof_of_lock(
     consensus_state: ConsensusState,
     proof_of_lock: ProofOfLock,
 ) -> (ConsensusState, Option<Message>) {
-
     let mut new_consensus_state = consensus_state.clone();
     let mut message = None;
 
@@ -19,7 +18,7 @@ pub fn on_proof_of_lock(
             consensus_state.round,
             consensus_state.height,
             &consensus_state.validators,
-            consensus_state.threshold
+            consensus_state.threshold,
         ) {
             let state_transition = proof_of_lock.proposal.state_transition;
             let new_locked_state = state_transition.apply_state_transition(&consensus_state.state);

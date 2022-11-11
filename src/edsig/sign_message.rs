@@ -1,4 +1,4 @@
-use ed25519_dalek::{PublicKey, Signature, SecretKey, Signer, Keypair};
+use ed25519_dalek::{Keypair, PublicKey, SecretKey, Signature, Signer};
 
 /*pub fn sign_message(message: &[u8], secret_key: &[u8]) -> Signature {
     let secret_key = ed25519_dalek::SecretKey::from_bytes(secret_key).unwrap();
@@ -13,7 +13,7 @@ pub fn sign_message(message: &[u8], secret_key: SecretKey) -> Signature {
         public: public_key,
         secret: secret_key,
     };
-    
+
     keypair.sign(message)
 }
 
@@ -21,14 +21,13 @@ pub fn sign_message(message: &[u8], secret_key: SecretKey) -> Signature {
 mod tests {
 
     use super::*;
-    use ed25519_dalek::{Verifier};
+    use ed25519_dalek::Verifier;
     use rand::rngs::OsRng;
-    use sha2::{Sha256, Digest};
+    use sha2::{Digest, Sha256};
 
     #[test]
     fn test_sign_message() {
-
-        let mut csprng = OsRng{};
+        let mut csprng = OsRng {};
         let keypair: Keypair = Keypair::generate(&mut csprng);
         let secret_key = keypair.secret;
         let public_key = keypair.public;
